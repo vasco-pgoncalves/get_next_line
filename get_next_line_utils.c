@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vascopinto <vascopinto@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vpinto-g <vpinto-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 14:04:44 by vascopinto        #+#    #+#             */
-/*   Updated: 2025/05/29 17:01:52 by vascopinto       ###   ########.fr       */
+/*   Created: 2025/06/02 11:37:15 by vpinto-g          #+#    #+#             */
+/*   Updated: 2025/06/02 16:27:53 by vpinto-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "get_next_line.h"
 ft_newline_counter(char *line)
@@ -64,4 +65,35 @@ char	*ft_strjoin(char *s1, char *s2)
 	s3[j + i] = '\0';
 	free(s1);
 	return (s3);
+}
+char	*ft_line_builder(char *s)
+{
+	int		i;
+	int		line_size;
+	char	*line;
+	
+	if (!s || !*s)
+		return (NULL);
+	i = 0;
+	line_size = ft_newline_counter (s);
+	if (line_size == -1)
+		line_size = ft_strlen(s) - 1;
+	line = malloc(sizeof(char) * line_size + 2);
+	if (!line)
+		return (NULL);
+	while (s[i] != '\n' && s[i])
+	{
+		line[i] = s[i];
+		i++;
+	}
+	if (s[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	free (s);
+	return (line);
+}
+
+void	ft_clean_stash(char *stash)
+{
+	
 }
